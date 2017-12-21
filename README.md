@@ -1,5 +1,10 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
+
+### Reflection
+1. [Assess](src/main.cpp#L245) we want to be able to know whether there are other cars in the front, left or right lanes. We want to avoid cars that are <=25m away from us.
+2. [Action]((src/main.cpp#L272)) decide whether to accelerate, slow down, or change lanes based on the assessment from the previous step.
+3. [Trajectory](src/main.cpp#L285) using points from the previous trajectory or the current position if none exists with points at a distance to generate the [spline](http://kluge.in-chemnitz.de/opensource/spline/spline.h) using car coordinates.
    
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
