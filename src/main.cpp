@@ -322,7 +322,7 @@ int main() {
 
             for (int i=0; i < ptsx.size(); i++) {
                 double shift_x = ptsx[i] - ref_x;
-                double shift_y = ptsx[i] - ref_y;
+                double shift_y = ptsy[i] - ref_y;
 
                 ptsx[i] = shift_x * cos(0 - ref_yaw) - shift_y * sin(0 - ref_yaw);
                 ptsy[i] = shift_x * sin(0 - ref_yaw) + shift_y * cos(0 - ref_yaw);
@@ -347,7 +347,7 @@ int main() {
 
             for (int i = 1; i < 50 - prev_size; i++) {
                 ref_velocity += speed_diff;
-                if (ref_velocity > MAX_SPEED) ref_velocity += speed_diff;
+                if (ref_velocity > MAX_SPEED) ref_velocity = MAX_SPEED;
                 else if (ref_velocity < MAX_ACC) ref_velocity = MAX_ACC;
 
                 double N = target_dist / (0.02 * ref_velocity / 2.24);
