@@ -2,10 +2,18 @@
 Self-Driving Car Engineer Nanodegree Program
 
 ### Reflection
-1. [Assess](src/main.cpp#L251) we want to be able to know whether there are other cars in the front, left or right lanes. We want to avoid cars that are <=30m away from us.
-2. [Action]((src/main.cpp#L288)) decide whether to accelerate, slow down, or change lanes based on the assessment from the previous step.
-3. [Trajectory](src/main.cpp#L367) using points from the previous trajectory or the current position if none exists with points at a distance to generate the [spline](http://kluge.in-chemnitz.de/opensource/spline/spline.h) using car coordinates.
-   
+1. [Assess](src/main.cpp#L252) we want to be able to know whether there are other cars in the front, left or right lanes and avoid cars that are <=30m away from us.
+
+For each car on the same side of the road we use the `sensor_fusion` to determine whether there are any cars ahead, to the left, or to the right. These values are globally determined as a disjunction between all the other cars and stored in `car_ahead`, `car_left` and `car_righ`. In other words if any of the cars happen to satisfy the criteria we set these flags to true. Lines `259-268` assess the lane, lines `269-275` assess the car speed, and lines `277-286` assess the presence of a car in one of three positions that we need to worry about.
+
+2. [Action](src/main.cpp#L290) decide whether to accelerate, slow down, or change lanes based on the assessment from the previous step.
+
+This step consists of a number of conditions. In lines 293-312 we either change lanes or decelerate if there's a car ahead. Otherwise we move to the center lane if possible and accelerate if we haven't reached the maximum allowable speed.
+
+3. [Trajectory](src/main.cpp#L314) using points from the previous trajectory or the current position if none exists with points at a distance to generate the [spline](http://kluge.in-chemnitz.de/opensource/spline/spline.h) using car coordinates.
+
+We start with using points from the previous trajectory (or current position if none exist) and target points (lines 348-350) to create a spline. Coordinates are transformed to the local car coordinates to simplify the calculations. Lines 374-379 ensure capture points from the previous path that ensure continuity. Finally we calculate the remaining points by evaluating the spline (line 396) and a transformation of the output to non-local coordinates while deciding the speed based on the value we calculated in the previous step for each point in the trajectory.
+
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
 

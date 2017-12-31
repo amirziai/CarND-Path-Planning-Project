@@ -248,6 +248,7 @@ int main() {
               car_s = end_path_s;
             }
 
+            // Assess the situation
             bool car_ahead = false;
             bool car_left = false;
             bool car_righ = false;
@@ -285,6 +286,7 @@ int main() {
                 }
             }
 
+            // Take action
             double speed_diff = 0;
             const double MAX_SPEED = 49.5;
             const double MAX_ACC = .224;
@@ -309,6 +311,7 @@ int main() {
               }
             }
 
+            // trajectory
           	vector<double> ptsx;
             vector<double> ptsy;
 
